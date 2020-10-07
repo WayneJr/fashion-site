@@ -2,13 +2,13 @@ const validEndpoints = ['fashion', 'eyewear', 'watches', 'fragrance', 'skincare'
 const controller = require('./controller');
 const {getModel} = require('../services/products');
 
-const Fashion = getModel('Fashion');
-const Eyewear = getModel('Eyewear');
-const Watches = getModel('Watches');
-const Fragrance = getModel('Fragrance');
-const Skincare = getModel('Skincare');
-const Makeup = getModel('Makeup');
-const Jewelry = getModel('Jewelry');
+const Fashion = getModel('fashion');
+const Eyewear = getModel('eyewear');
+const Watches = getModel('watches');
+const Fragrance = getModel('fragrance');
+const Skincare = getModel('skincare');
+const Makeup = getModel('makeup');
+const Jewelry = getModel('jewelry');
 
 const models = [Fashion.modelName.toLowerCase(), Eyewear.modelName.toLowerCase(), Watches.modelName.toLowerCase(), Fragrance.modelName.toLowerCase(), Skincare.modelName.toLowerCase(), Makeup.modelName.toLowerCase(), Jewelry.modelName.toLowerCase()];
 // const lowercase = 
@@ -32,11 +32,46 @@ module.exports = app => {
         if (validEndpoints.includes(category) && models.includes(category)) {
             // res.send(`You reached the ${category} endpoint array`);
             // console.log();
-            controller.theData(req, res, getModel(capitalize(category)));
+            controller.theData(req, res, getModel(category));
         } else {
             res.redirect('/not-found');
         }
     });
+
+    app.post('/:category', (req, res) => {
+        // const category = req.body.;
+        // if (validEndpoints.includes(category) && models.includes(category)) {
+        //     controller.postData(req, res, getModel(category));
+        // } else {
+        //     res.redirect('/not-found');
+        // }
+        const category = req.params.category;
+        /* const name = req.body.pname;
+        const url = req.body.url;
+        const price = req.body.price;
+        const product = {name: name, url: url, price: price}; */
+        if (validEndpoints.includes(category) && models.includes(category)) {
+            getModel(category).create(req.body.product, (err, product) => {
+                if (err) {
+                    // console.log(req.body);
+                    console.error(error);
+                } else {
+                    console.log('successfully sent', product);
+                    res.redirect('/');
+                }
+            });
+        }
+    });
+
+    /* app.post('/fashion', (req, res) => {
+        getModel('fashion').create(req.body.product, (err, product) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log(product);
+            }
+        })
+    }) */
 
     /* app.get('*', (req, res) => {
         res.redirect('/not-found');

@@ -15,6 +15,9 @@ module.exports = {
     getData: function(model, next) {
         model.find({}, next); 
         
+    },
+    sendData: function(model, next) {
+        model.create(model, next);
     }
 }
 /* module.exports = {

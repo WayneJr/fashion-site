@@ -1,6 +1,6 @@
 // Use the controller to request different productsb
 // based off of the categories in the routes array
-const {getData} = require('../services/products');
+const {getData, sendData} = require('../services/products');
 // const mongoose = require('mongoose');
 
 
@@ -12,9 +12,20 @@ const controller = {
             if (err) {
                 console.log(err);
             } else {
+                // res.header("Access-Control-Allow-Origin", "*");
+                // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                 res.json(products);
             }
         });
+    },
+    postData: function(req, res, category) {
+        sendData(category, (err, products) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Successfully sent');
+            }
+        })
     }
 }
 

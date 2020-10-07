@@ -1,12 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mariapinto Api</title>
-</head>
-<body>
-    Welcome to The Api
-</body>
-</html>
+<%- include ('partials/header') %> 
+
+
+<h1>Welcome to the Api</h1>
+
+<h3>The following endpoints</h3>
+<ul>
+    
+    <li><a href="/fashion">fashion</a></li>
+    <li><a href="/eyewear">eyewear</a></li>
+    <li><a href="/watches">watches</a></li>
+    <li><a href="/fragrance">fragrance</a></li>
+    <li><a href="/skincare">skincare</a></li>
+    <li><a href="/makeup">makeup</a></li>
+    <li><a href="/jewelry">jewelry</a></li>
+</ul>
+
+<br>
+<br>
+
+<form  action="/fashion" method="POST">
+    <label>Name</label><br>
+    <input type='text' name='product[name]' placeholder='name'><br><br>
+
+    <label>Image URL</label><br>
+    <input type='text' name='product[url]' placeholder='url'><br><br>
+
+    <label>Price</label><br>
+    <input type='text' name='product[price]' placeholder='price'><br><br>
+
+    <input type='submit' value='Add Fashion Item'>
+
+</form>
+
+
+<%- include ('partials/footer') %> 
